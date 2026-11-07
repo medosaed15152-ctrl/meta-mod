@@ -16,7 +16,7 @@ public class CompanionEntity extends PathfinderMob {
     private static final EntityDataAccessor<String> SKIN = SynchedEntityData.defineId(CompanionEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Boolean> SLIM = SynchedEntityData.defineId(CompanionEntity.class, EntityDataSerializers.BOOLEAN);
 
-    /** follow | stay | wander — set by the brain */
+    /** follow | stay | wander - set by the brain */
     public volatile String mode = "follow";
 
     public CompanionEntity(EntityType<? extends PathfinderMob> type, Level level) {
@@ -66,7 +66,7 @@ public class CompanionEntity extends PathfinderMob {
         });
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0f));
         goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-        targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this));
         targetSelector.addGoal(2, new net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal<>(
                 this, net.minecraft.world.entity.monster.Monster.class, true));
     }
@@ -82,7 +82,7 @@ public class CompanionEntity extends PathfinderMob {
             return target != null && distanceToSqr(target) > 16;
         }
         @Override public boolean canContinueToUse() {
-            return "follow".equals(mode) && target != null && target.isAlive() && distanceToSqr(target) > 6;
+return "follow".equals(mode) && target != null && target.isAlive() && distanceToSqr(target) > 6;
         }
         @Override public void tick() {
             getLookControl().setLookAt(target);
